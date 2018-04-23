@@ -97,5 +97,5 @@ input[type=range]::-webkit-slider-thumb {
 }
 
 .musicplayerall {
-  display: inline-block;
+  padding-left: 8%;
 }
