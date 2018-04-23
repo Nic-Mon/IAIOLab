@@ -96,5 +96,6 @@ input[type=range]::-webkit-slider-thumb {
   cursor: pointer;
 }
 
-.musicplayer {
+.musicplayerall {
+  display: inline-block;
 }

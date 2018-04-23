@@ -20,7 +20,7 @@ var song = new Audio();
       'color':'#000',
     })
     parent.css({
-      'background-color':'#82b1ff',
+      'background-color':'#008275',
       'color':'#fff',
     })
 
