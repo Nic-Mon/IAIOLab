@@ -1,11 +1,12 @@
 $('document').ready(function(){
 
-  var songs = new Array();
-  $('.songPlay').each(function(){
-    $(this).parents('.collection-item');
-    songs.push($(this));
-    console.log(this);
-  });
+  update_songs();
+  // var songs = new Array();
+  // $('.songPlay').each(function(){
+  //   $(this).parents('.collection-item');
+  //   songs.push($(this));
+  //   console.log(songs);
+  // });
 
 var song = new Audio();
 
@@ -41,8 +42,6 @@ var song = new Audio();
 
     $("#play").text('pause_circle_outline');
 
-    // TODO: update this to read from url
-    // song.src = 'musics/'+src ;
     song.src = src ;
     song.volume =1 ;
     song.play();
@@ -70,7 +69,6 @@ var song = new Audio();
     }
 
   });
-
 
   song.addEventListener('timeupdate',function (){
     $(".current").text(formatSecondsAsTime(song.currentTime))
@@ -171,10 +169,22 @@ var song = new Audio();
         $("#duration").attr("max", song.duration);
     });
 
+$(".add_song").click(function() {
 
+        $(this).find( 'li.collection-item' ).show();
+        track = $(this).find( 'li.collection-item' ).clone();
+        $(this).find( 'li.collection-item' ).appendTo( "#playlist" );
+        $(this).find( 'li.collection-item' ).hide();
+        update_songs();
+});
 
-
-
+function update_songs(){
+  var songs = new Array();
+  $('.songPlay').each(function(){
+    $(this).parents('.collection-item');
+    songs.push($(this));
+  });
+}
 
 function formatSecondsAsTime(secs) {
   var hr  = Math.floor(secs / 3600);
@@ -219,10 +229,5 @@ $('#fav').on('click',function(){
   });
 
 });
-
-
-
-
-
 
 });

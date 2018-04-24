@@ -147,7 +147,7 @@
                     <a class="waves-effect disabled btn-small">Load Playlist</a>
                   </div>
                 <div class="playlist col s12 no-padding">
-                  <ul class="collection with-header grey lighten-4">
+                  <ul id="playlist" class="collection with-header grey lighten-4">
                     <li class="collection-header"><h5>Playlist</h5></li>
                     <li class="collection-item"><div>Sugarfoot Stomp <a href="#playsection" class='secondary-content'><i class="material-icons songPlay" data-link="https://archive.org/download/78_sugar-foot-stomp_connies-inn-orchestra-armstrong-oliver-rex-stewart-russell-smith_gbia0001054a/Sugar%20Foot%20Stomp%20-%20Connie%27s%20Inn%20Orchestra.mp3" data-name='Sugarfoot Stomp' cover="https://ia801601.us.archive.org/6/items/78_sugar-foot-stomp_connies-inn-orchestra-armstrong-oliver-rex-stewart-russell-smith_gbia0001054a/78_sugar-foot-stomp_connies-inn-orchestra-armstrong-oliver-rex-stewart-russell-smith_gbia0001054a_itemimage.jpg">play_arrow</i></a></div></li>
                     <li class="collection-item"><div>Grieg Piano Concierto <a href="#playsection" class="secondary-content"><i class="material-icons songPlay" data-link="https://archive.org/download/78_grieg-piano-concerto_freddy-martin-and-his-orchestra-jack-fina-ray-austin_gbia0019618a/Grieg%20Piano%20Concerto%20-%20Freddy%20Martin%20and%20his%20Orchestra.mp3" data-name='Grieg Piano Concierto' cover="https://ia800802.us.archive.org/32/items/78_grieg-piano-concerto_freddy-martin-and-his-orchestra-jack-fina-ray-austin_gbia0019618a/78_grieg-piano-concerto_freddy-martin-and-his-orchestra-jack-fina-ray-austin_gbia0019618a_itemimage.jpg">play_arrow</i></a></div></li>
@@ -247,7 +247,14 @@
               </div>
               <div class="card-content">
                 <span class="card-title activator grey-text text-darken-4">House of the Rising Son<i class="material-icons right">more_vert</i></span>
-                <p><a href="#">Add to Playlist</a></p>
+                <!-- <p><a class="add_song" href="#">Add to Playlist</a></p> -->
+                <div class="add_song">
+                  <a href="#">Add to Playlist</a>
+                  <li style="display: none;" class="collection-item"><div>House of the Rising Sun <a href="#playsection" class='secondary-content'><i class="material-icons songPlay" data-link="https://archive.org/download/78_house-of-the-rising-sun_josh-white-and-his-guitar_gbia0001628b/House%20Of%20The%20Rising%20Sun%20-%20Josh%20White%20and%20his%20Guitar.mp3" data-name='House of the Rising Sun' cover="https://ia801601.us.archive.org/14/items/78_house-of-the-rising-sun_josh-white-and-his-guitar_gbia0001628b/78_house-of-the-rising-sun_josh-white-and-his-guitar_gbia0001628b_itemimage.jpg">play_arrow</i></a></div></li>
+                </div>
+                <!-- hidden element to add to playlist -->
+
+
                 </div>
               <div class="card-reveal">
                 <span class="card-title grey-text text-darken-4">Info<i class="material-icons right">close</i></span>
