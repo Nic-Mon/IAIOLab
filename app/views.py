@@ -1,12 +1,44 @@
 from flask import render_template, redirect, request, session
 from app import app, models
+import random 
 
-# Access the models file to use SQL functions
+georgeblood_ids = np.load('georgeblood_ids.npy').tolist()
 
+#hit IA api
+def get_mp3_filename(identifier):
+	url = 'http://archive.org/metadata/{}'.format(identifier)
+	r = requests.get(url)
+	json = r.json()
+
+	files = json['files']
+
+	mp3s = []
+	for file in files:
+		name = file['name']
+		if '.mp3' in name:
+			mp3s.append(name)
+	#remove results that start with 78 or _78
+	clean_mp3s = [m for m in mp3s if not m.startswith('78') and not m.startswith('_78')]
+	# only return first one
+	return clean_mp3s[0]
 
 @app.route('/')
 def index():
-    return render_template('index.html')
+	song_ids = random.sampe(georgeblood_ids, 12)
+	records = []
+	url = 'http://archive.org/download/'
+
+	for identifier in song_ids:
+		song_mp3 = get_mp3_filename(identifier)
+		song_name = song_mp3[:-4]
+		mp3_url = url + identifier + '/' + song_mp3
+		img_url = url + identifier + '/' + identifier + '_itemimage.jpg'
+
+		records.append( (identifier, song_name, mp3_url, img_url) )
+
+	return render_template('index.html', records=records)
+
+
 
 # @app.route('/new_user', methods=['GET', 'POST'])
 # def new_user():
