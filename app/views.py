@@ -1,6 +1,7 @@
 from flask import render_template, redirect, request, session
 from app import app, models
 import random 
+import numpy as np
 
 georgeblood_ids = np.load('georgeblood_ids.npy').tolist()
 
