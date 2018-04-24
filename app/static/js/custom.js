@@ -1,17 +1,19 @@
 $('document').ready(function(){
 
+// TODO: update songs array when new items are added
   var songs = new Array();
   $('.songPlay').each(function(){
     $(this).parents('.collection-item');
     songs.push($(this));
+    console.log(this);
   });
-
 
 var song = new Audio();
 
   $('.songPlay').on("click",function(){
     $('.collection-item[status=playing]').attr('status','stopped')
     var _this = $(this);
+    console.log(this);
     parent = _this.parents('.collection-item');
     parent.attr('status','playing');
 
@@ -39,7 +41,9 @@ var song = new Audio();
 
     $("#play").text('pause_circle_outline');
 
-    song.src = 'musics/'+src ;
+    // TODO: update this to read from url
+    // song.src = 'musics/'+src ;
+    song.src = src ;
     song.volume =1 ;
     song.play();
 
