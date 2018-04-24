@@ -1,5 +1,5 @@
 import sqlite3 as sql
-dbname = 'app.db'
+dbname = '../app.db'
 
 def db_reset():
     with open('schema.sql', 'r') as myfile:
@@ -34,15 +34,16 @@ def db_create_playlist(username, name):
         sqltext = ("INSERT INTO playlists (username, name)"
             " VALUES (?, ?)")
         cur.execute(sqltext, (username, name))
+        id = cur.lastrowid
         con.commit()
-        return True
+        return id
 
 def db_delete_playlist(id):
     with sql.connect(dbname) as con:
         cur = con.cursor()
-        val = cur.execute("DELETE FROM playlists WHERE id=?", [id])
+        cur.execute("DELETE FROM playlists WHERE id=?", [id])
         con.commit()
-        return val
+        return
 
 def db_fetch_playlists(username):
     response = []
@@ -58,12 +59,6 @@ def db_fetch_playlists(username):
             row['name'] = rowlist[2]
             response.append(row)
         return response
-
-def db_rename_playlist(id, name):
-    with sql.connect(dbname) as con:
-        cur = con.cursor()
-        sqltext = "UPDATE playlists SET name=? WHERE (id=?)"
-        cur.execute(sqltext, (name, id))
 
 def db_fetch_playlist_songs(playlist_id):
     with sql.connect(dbname) as con:
@@ -84,29 +79,42 @@ def db_fetch_playlist_songs(playlist_id):
             response.append(row)
         return response
 
-def db_song_add(playlist_id, song_id, mp3_path, img_path):
+def db_modify_playlist(playlist_id, name, song_id_list):
     with sql.connect(dbname) as con:
         cur = con.cursor()
-        sqltext = ("SELECT COUNT(*) FROM playlist_songs "
-            "WHERE (playlist_id=?)")
+        sqltext = "UPDATE playlists SET name=? WHERE (id=?)"
+        cur.execute(sqltext, (name, playlist_id))
+        sqltext = "DELETE FROM playlist_songs WHERE (playlist_id=?)"
         cur.execute(sqltext, [playlist_id])
-        song_order = cur.fetchone()[0] + 1
-        sqltext = ("INSERT INTO playlist_songs "
-            "(playlist_id, song_order, song_id, mp3_path, img_path) "
-            "VALUES (?, ?, ?, ?, ?)")
-        cur.execute(sqltext, 
-            (playlist_id, song_order, song_id, mp3_path, img_path))
-    return
+        sqltext = ("INSERT INTO playlist_songs (playlist_id, "
+            "song_order, song_id) "
+            " VALUES (?, ?, ?)")
+        song_order = 1
+        for song_id in song_id_list:
+            cur.execute(sqltext, (playlist_id, song_order, song_id))
+            song_order += 1
+        con.commit()
 
-def db_song_delete(playlist_song_id):
+def db_mp3_path_add(song_id, mp3_path):
     with sql.connect(dbname) as con:
         cur = con.cursor()
-        sqltext = "DELETE FROM playlist_songs WHERE (id=?)"
-        cur.execute(sqltext, [playlist_song_id])
-    return
+        sqltext = ("INSERT INTO mp3_paths (song_id, mp3_path) "
+            "VALUES (?, ?)")
+        cur.execute(sqltext, (song_id, mp3_path))
+        con.commit()
 
-def db_song_earlier(playlist_song_id):
-    return
+def db_mp3_path_lookup(song_id):
+    with sql.connect(dbname) as con:
+        cur = con.cursor()
+        sqltext = ("SELECT mp3_path FROM mp3_paths "
+            "WHERE (song_id=?)")
+        cur.execute(sqltext, [song_id])
+    return (cur.fetchone()[0])
 
-def db_song_later(playlist_song_id):
-    return
+def db_mp3_path_delete(song_id):
+    with sql.connect(dbname) as con:
+        cur = con.cursor()
+        cur.execute("DELETE FROM mp3_paths WHERE song_id=?", [song_id])
+        con.commit()
+        return
+

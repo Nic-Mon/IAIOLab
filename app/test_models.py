@@ -1,34 +1,37 @@
 import models
 
-print('creating user')
+print('-- creating user --')
 print(models.db_create_user('mbayley', '1111'))
 
-print('logging in')
+print('-- logging in --')
 print(models.db_login('mbayley', '1111'))
 
-print('creating playlist')
-print(models.db_create_playlist('mbayley', 'my_playlist'))
+print('-- creating playlist --')
+playlist_id = models.db_create_playlist('mbayley', 'my_playlist')
+print('playlist id = ' + str(playlist_id))
 
-print('fetching playlists')
-pl = models.db_fetch_playlists('mbayley')
-print(pl)
-playlist_id = pl[0]['id']
-print('id=' + str(playlist_id))
-
-print('changing playlist name with id ' + str(playlist_id))
-models.db_rename_playlist(playlist_id, 'jams')
+print('-- fetching playlists --')
 print(models.db_fetch_playlists('mbayley'))
 
-print('deleting playlist')
+print('-- editing playlist name with id ' + str(playlist_id) + ' --')
+models.db_modify_playlist(
+    playlist_id,
+    'jams',
+    ['songid1', 'songid2']
+    )
+print(models.db_fetch_playlists('mbayley'))
+
+print('-- deleting playlist --')
 models.db_delete_playlist(playlist_id)
 
-print('adding a song')
-models.db_create_playlist('mbayley', 'my_playlist2')
-pl = models.db_fetch_playlists('mbayley')
-playlist_id = pl[0]['id']
-models.db_song_add(playlist_id, 1, 'mp3_path', 'img_path')
+print('-- looking up mp3 path --')
+mp3_path = models.db_mp3_path_lookup('songid1')
+print(mp3_path)
 
-print('deleting a song')
-playlist_song_id = models.db_fetch_playlist_songs(playlist_id)[0]['id']
-models.db_song_delete(playlist_song_id)
+if mp3_path:
+    print('-- deleting mp3 path --')
+    models.db_mp3_path_delete('songid1')
+
+print('-- adding mp3 path --')
+models.db_mp3_path_add('songid1', 'www.fake.path/file.mp3')
 
