@@ -8,6 +8,21 @@ from app import app, models
 def index():
     return render_template('index.html')
 
+@app.route("/save_playlist", methods=['GET','POST'])
+def save_playlist():
+
+    app.logger.debug("JSON received...")
+    app.logger.debug(request.json)
+
+    if request.json:
+        mydata = request.json # will be
+        app.logger.debug(mydata['a'])
+        return "Data received"
+
+    else:
+        return "no json received"
+
+
 # @app.route('/new_user', methods=['GET', 'POST'])
 # def new_user():
 #     form = UserForm()
