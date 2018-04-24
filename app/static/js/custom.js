@@ -1,6 +1,5 @@
 $('document').ready(function(){
 
-// TODO: update songs array when new items are added
   var songs = new Array();
   $('.songPlay').each(function(){
     $(this).parents('.collection-item');
@@ -37,7 +36,8 @@ var song = new Audio();
     _this.text("pause");
 
     var src = _this.attr('data-link');
-    $('#cover').css('background-image','url(images/covers/'+_this.attr('cover')+')');
+    // $('#cover').css('background-image','url(images/covers/'_this.attr('cover')+')');
+    $('#cover').css('background-image','url('+_this.attr('cover')+')');
 
     $("#play").text('pause_circle_outline');
 
