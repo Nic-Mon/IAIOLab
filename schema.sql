@@ -1,5 +1,5 @@
--- Insert code to create Database Schema
--- This will create your .db database file for use
+-- sqlite3 database schema;
+
 drop table if exists users;
 create table users (
     username text primary key,
@@ -14,13 +14,24 @@ create table playlists (
     FOREIGN KEY(username) REFERENCES users(username)
 );
 
+drop view if exists playlist_song_paths;
 drop table if exists playlist_songs;
 create table playlist_songs (
-    id integer primary key,
     playlist_id integer,
     song_order integer,
     song_id text,
-    mp3_path text,
-    img_path text,
+    PRIMARY KEY(playlist_id, song_order),
     FOREIGN KEY(playlist_id) REFERENCES playlists(id)
 );
+
+drop table if exists mp3_paths;
+create table mp3_paths (
+    song_id text PRIMARY KEY,
+    mp3_path text
+);
+
+create view playlist_song_paths AS
+    SELECT * FROM playlist_songs
+        LEFT JOIN mp3_paths 
+            ON playlist_songs.song_id=mp3_paths.song_id;
+
