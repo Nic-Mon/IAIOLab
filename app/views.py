@@ -1,6 +1,7 @@
 from flask import render_template, redirect, request, session
 from app import app, models
-import random 
+import requests
+import random
 import numpy as np
 import os
 
@@ -28,7 +29,7 @@ def get_mp3_filename(identifier):
 
 @app.route('/')
 def index():
-	song_ids = random.sampe(georgeblood_ids, 12)
+	song_ids = random.sample(georgeblood_ids, 12)
 	records = []
 	url = 'http://archive.org/download/'
 

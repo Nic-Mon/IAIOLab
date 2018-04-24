@@ -37,7 +37,6 @@ var song = new Audio();
     _this.text("pause");
 
     var src = _this.attr('data-link');
-    // $('#cover').css('background-image','url(images/covers/'_this.attr('cover')+')');
     $('#cover').css('background-image','url('+_this.attr('cover')+')');
 
     $("#play").text('pause_circle_outline');
@@ -169,6 +168,7 @@ var song = new Audio();
         $("#duration").attr("max", song.duration);
     });
 
+// TODO: clone hidden collection item so you can add to playlist more than once
 $(".add_song").click(function() {
 
         $(this).find( 'li.collection-item' ).show();
@@ -186,11 +186,30 @@ function update_songs(){
   });
 }
 
+// Saves songs in playlist
 $(function() {
   $('#savePlaylist').click(function(){
-    $('#playlist').children( 'li.collection-item' ).each(function(){
-      console.log(this);
+
+    // Variables to send by AJAX
+    var playlist_name = $('#playlist').find('li.collection-header').text()
+    var playlist_id = parseInt($('#playlist').find('li.collection-id').text())
+    var song_id_list = []
+    console.log(playlist_id);
+
+    // if playlist name is null
+    if (playlist_name === ""){
+      playlist_name = 'unnamed';
+    };
+
+    // iterate through song elements currently in playlist and get ids
+    $('#playlist').find( '.songPlay' ).each(function(){
+      var _this = $(this);
+      song_id_list.push(_this.attr('song-id'));
     });
+
+    // Create JSON object to send to server
+    myJSON = { 'playlist_name' : playlist_name, 'playlist_id' : playlist_id, 'song_id_list' : song_id_list};
+    console.log(myJSON);
 });
 
 });
