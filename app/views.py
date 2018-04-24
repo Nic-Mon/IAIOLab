@@ -10,17 +10,38 @@ def index():
 
 @app.route("/save_playlist", methods=['GET','POST'])
 def save_playlist():
+    ## This function requires: playlist_id, name, song_id_list
 
+    # Debug receive JSON messages
     app.logger.debug("JSON received...")
     app.logger.debug(request.json)
 
+    # Load JSON into local variable
     if request.json:
         mydata = request.json # will be
-        app.logger.debug(mydata['a'])
         return "Data received"
-
     else:
         return "no json received"
+
+    ## Get user and songs
+    # user = session['username']
+    # song_id_list = mydata['song_id_list']
+    # playlist_name = mydata['playlist_name']
+
+    ## if playlist_id is null, create new playlist and get id from function
+    # if not mydata['playlist_id']:
+    #   playlist_id = db_create_playlist(user, name)
+    # else:
+    #   playlist_id = mydata['playlist_id']
+
+    ## write songs to playlist
+    ## if no playlist_id, throw error
+    # if not playlist_id:
+    #   app.logger.debug("write playlist failed, no id")
+    #   return "Error: Could not write to database, no playlist id"
+    # else:
+    #   db_modify_playlist(playlist_id, playlist_name, song_id_list)
+    #   return "Success: playlist written to database"
 
 
 # @app.route('/new_user', methods=['GET', 'POST'])
