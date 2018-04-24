@@ -2,8 +2,11 @@ from flask import render_template, redirect, request, session
 from app import app, models
 import random 
 import numpy as np
+import os
 
-georgeblood_ids = np.load('georgeblood_ids.npy').tolist()
+SITE_ROOT = os.path.realpath(os.path.dirname(__file__))
+gb_path = os.path.join(SITE_ROOT, 'static', 'georgeblood_ids.npy')
+georgeblood_ids = np.load(gb_path).tolist()
 
 #hit IA api
 def get_mp3_filename(identifier):
