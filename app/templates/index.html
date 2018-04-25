@@ -7,13 +7,35 @@
 
   <!-- CSS  -->
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-  <link href="static/css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
   <link href="static/css/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+  <link href="static/css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+  <link href="https://fonts.googleapis.com/css?family=Arvo|Gravitas+One" rel="stylesheet">
+
   <!-- For Media player -->
  <!--  <link type="text/css" rel="stylesheet" href="css/materialize.css"  media="screen,projection"/> -->
   <link type="text/css" rel="stylesheet" href="static/css/custom.css"  media="screen,projection"/>
 <!--   <link type="text/css" rel="stylesheet" href="css/icon.css"  media="screen,projection"/> -->
 </head>
+<style>
+
+.gravitas{
+  font-family: 'Gravitas One', cursive;
+}
+
+html{
+  font-family: 'Arvo', serif;
+}
+
+.card-title{
+  font-size: 18px !important;
+}
+
+nav .brand-logo{
+  color: black;
+}
+
+</style>
+
 <body>
   <nav class="white" role="navigation">
     <div class="nav-wrapper container">
@@ -37,7 +59,7 @@
     <div class="section no-pad-bot">
       <div class="container">
         <br><br>
-        <h1 class="header center teal-text text-lighten-2">78 RPM Record Player</h1>
+        <h1 class="header center teal-text text-lighten-2 gravitas">78 RPM Record Player</h1>
         <div class="row center">
           <h5 class="header col s12 light">A modern responsive 78 RPM record playing site</h5>
         </div>
@@ -194,7 +216,7 @@
 
         <!-- Cards Template -->
         {% for record in records %}
-        <div class="col s12 m4">
+        <div class="col s6 m6">
           <div class="icon-block">
 
             <div class="card">
@@ -222,6 +244,7 @@
                 </div>
               </div>
             </div>
+
           {% endfor %}
 
   </div> <!-- /browse -->

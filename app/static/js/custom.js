@@ -232,31 +232,6 @@ $(function() {
 });
 });
 
-// Test sending JSON to flask with AJAX
-// $(function() {
-//     $('#test-button').click(function() {
-//         var a = $('#test-data').text();
-//         var obj = { a : "1" };
-//         var myJSON = JSON.stringify(obj);
-//         $.ajax({
-//             url: '/save_playlist',
-//             type: 'POST',
-//             data: myJSON,
-//             contentType: 'application/json',
-//             // dataType: 'json',
-//             success: function(response) {
-//                 console.log(response);
-//             },
-//             error: function(error) {
-//                 console.log(error);
-//             }
-//         });
-//     });
-// });
-
-
-
-
 function formatSecondsAsTime(secs) {
   var hr  = Math.floor(secs / 3600);
   var min = Math.floor((secs - (hr * 3600))/60);

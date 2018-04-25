@@ -44,8 +44,6 @@ def index():
 
 	return render_template('index.html', records=records)
 
-
-
 @app.route("/save_playlist", methods=['GET','POST'])
 def save_playlist():
 
@@ -73,6 +71,10 @@ def save_playlist():
 	return_id = str(playlist_id)
 	return return_id
 
+@app.route("/load_playlist")
+def load_playlist():
+
+	return "nothing"
 
 # @app.route('/new_user', methods=['GET', 'POST'])
 # def new_user():

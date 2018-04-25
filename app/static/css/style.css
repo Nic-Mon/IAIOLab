@@ -6,6 +6,14 @@
  * Made By MaterializeCSS.com
  */
 
+.card-title{
+  font-size: 18px;
+}
+
+h1{
+  font-family: 'Gravitas One', cursive;
+}
+
 nav ul a,
 nav .brand-logo {
   color: #444;
