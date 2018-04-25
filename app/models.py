@@ -1,5 +1,5 @@
 import sqlite3 as sql
-dbname = '../app.db'
+dbname = 'app.db'
 
 def db_reset():
     with open('schema.sql', 'r') as myfile:
@@ -117,4 +117,3 @@ def db_mp3_path_delete(song_id):
         cur.execute("DELETE FROM mp3_paths WHERE song_id=?", [song_id])
         con.commit()
         return
-

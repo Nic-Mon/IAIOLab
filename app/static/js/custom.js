@@ -13,7 +13,7 @@ var song = new Audio();
   $('.songPlay').on("click",function(){
     $('.collection-item[status=playing]').attr('status','stopped')
     var _this = $(this);
-    console.log(this);
+    // console.log(this);
     parent = _this.parents('.collection-item');
     parent.attr('status','playing');
 
@@ -190,16 +190,20 @@ function update_songs(){
 $(function() {
   $('#savePlaylist').click(function(){
 
+    // Check if playlist name
+    if ($('#playlist').find('li.collection-header').text() === ""){
+        var message = "please give this playlist a name"
+        result = window.prompt(message, "default");
+        $('#playlist').find('li.collection-header').text(result)
+        var playlist_name = result
+    } else {
+        var playlist_name = $('#playlist').find('li.collection-header').text()
+    };
+
     // Variables to send by AJAX
     var playlist_name = $('#playlist').find('li.collection-header').text()
     var playlist_id = parseInt($('#playlist').find('li.collection-id').text())
     var song_id_list = []
-    console.log(playlist_id);
-
-    // if playlist name is null
-    if (playlist_name === ""){
-      playlist_name = 'unnamed';
-    };
 
     // iterate through song elements currently in playlist and get ids
     $('#playlist').find( '.songPlay' ).each(function(){
@@ -208,10 +212,24 @@ $(function() {
     });
 
     // Create JSON object to send to server
-    myJSON = { 'playlist_name' : playlist_name, 'playlist_id' : playlist_id, 'song_id_list' : song_id_list};
-    console.log(myJSON);
-});
+    var obj = { 'playlist_name' : playlist_name, 'playlist_id' : playlist_id, 'song_id_list' : song_id_list};
+    var myJSON = JSON.stringify(obj);
+    $.ajax({
+        url: '/save_playlist',
+        type: 'POST',
+        data: myJSON,
+        contentType: 'application/json',
+        // dataType: 'json',
+        success: function(response) {
+            console.log(response);
+            $('#playlist').find('li.collection-id').text(response)
 
+        },
+        error: function(error) {
+            console.log(error);
+        }
+    });
+});
 });
 
 // Test sending JSON to flask with AJAX
