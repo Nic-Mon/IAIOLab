@@ -1,6 +1,6 @@
 $('document').ready(function(){
 
-  update_songs();
+  // update_songs();
   // var songs = new Array();
   // $('.songPlay').each(function(){
   //   $(this).parents('.collection-item');
@@ -8,8 +8,7 @@ $('document').ready(function(){
   // });
 
 var song = new Audio();
-
-  $('.songPlay').on("click",function(){
+  $(document).on('click','.songPlay',function(){
     $('.collection-item[status=playing]').attr('status','stopped')
     var _this = $(this);
     console.log(this);
@@ -175,19 +174,18 @@ $(".add_song").click(function() {
         // track = $(this).find( 'li.collection-item' ).clone();
         $(this).find( 'li.collection-item' ).appendTo( "#playlist" );
         // $(this).find( 'li.collection-item' ).hide();
-        // update_songs();
 });
 
 function update_songs(){
   var songs = new Array();
-  $('.songPlay').each(function(){
+  $("#playlist").find('.songPlay').each(function(){
     $(this).parents('.collection-item');
     songs.push($(this));
   });
   console.log(songs);
 }
 
-// Saves songs in playlist
+// Save songs in playlist
 $(function() {
   $('#savePlaylist').click(function(){
 
@@ -220,9 +218,7 @@ $(function() {
         type: 'POST',
         data: myJSON,
         contentType: 'application/json',
-        // dataType: 'json',
         success: function(response) {
-            console.log(response);
             $('#playlist').find('li.collection-id').text(response)
         },
         error: function(error) {
@@ -234,8 +230,9 @@ $(function() {
 
 $(function() {
   $('#loadPlaylist').click(function(){
+
+    $("#playlist").html('');
     // var playlist_id = $('#playlists_select option:selected').text()
-    console.log("load-clicked")
     var playlist_id = $('#select option:selected').val();
     var playlist = []
     var obj = { 'playlist_id' : playlist_id }
@@ -266,11 +263,11 @@ function callback(data) {
   var playlist = JSON.parse(data);
 
   playlist.forEach(function(item){
-      $(" #playlist ")
+      $("#playlist")
         .append($("<li></li>").addClass("collection-item")
           .append($("<div></div").text(item[1])
-            .append($('<a></a>').addClass("seconday-content").attr("href", "#playsection")
-              .append($('<i></i>').addClass("material-icons songPlay")
+            .append($('<a></a>').addClass("secondary-content").attr("href", "#playsection")
+              .append($('<i></i>').addClass("songPlay material-icons")
                 .text("play_arrow")
                 .attr({
                   "song-id"  : item[0],
@@ -278,27 +275,6 @@ function callback(data) {
                   "data-name": item[1],
                   "cover"    : item[3]
                 })))))})}
-
-
- // callback
-      // $('<li/>', { "class": "collection-record", text:(item[1]) })
-
-      //     $('<div/>', { text:(item[1]) }.append(
-      //       $('<a/>', { "href": "#" , "class": "secondary-content"} ).append(
-      //         $('<i/>',
-      //           { "class": "material-icons songPlay",
-      //             "song-id=" : item[0],
-      //             "data-link": item[2],
-      //             "data-name": item[1],
-      //             "cover"    : item[3]
-      //           })
-      //       )
-      //     )
-      // );
-
-
-
-
 //////End our code
 
 function formatSecondsAsTime(secs) {
