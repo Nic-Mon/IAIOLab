@@ -172,12 +172,12 @@ var song = new Audio();
 /////// Our Code
 // TODO: clone hidden collection item so you can add to playlist more than once
 $(".add_song").click(function() {
-
+        console.log('add-song_click')
         $(this).find( 'li.collection-item' ).show();
-        track = $(this).find( 'li.collection-item' ).clone();
+        // track = $(this).find( 'li.collection-item' ).clone();
         $(this).find( 'li.collection-item' ).appendTo( "#playlist" );
-        $(this).find( 'li.collection-item' ).hide();
-        update_songs();
+        // $(this).find( 'li.collection-item' ).hide();
+        // update_songs();
 });
 
 function update_songs(){
@@ -233,8 +233,6 @@ $(function() {
 });
 });
 
-
-
 $(function() {
   $('#loadPlaylist').click(function(){
     // var playlist_id = $('#playlists_select option:selected').text()
@@ -268,24 +266,28 @@ function callback(data) {
   var playlist = JSON.parse(data);
 
   // console.log(playlist[1])
-  playlist.forEach(function(item) {
-    var $i = $('<li/>', { "class": "collection-record" }).append(
-        $('<div/>', { text:(item[1]) }.append(
-          $('<a/>', { "href": "#" , "class": "secondary-content"} ).append(
-            $('<i/>',
-              { "class": "material-icons songPlay",
-                "song-id=" : item[0],
-                "data-link": item[2],
-                "data-name": item[1],
-                "cover"    : item[3]
-              })
-          )
-        )
-      )
-    );
-    $( "#playlist" ).append($i);
-  });
-}
+  $( "#playlist" ).append(
+    playlist.forEach(function(item){
+      $('<li/>', { "class": "collection-record", text:(item[1]) })
+
+    }) // endfor
+  ); // append
+  } // callback
+      // $('<li/>', { "class": "collection-record", text:(item[1]) })
+
+      //     $('<div/>', { text:(item[1]) }.append(
+      //       $('<a/>', { "href": "#" , "class": "secondary-content"} ).append(
+      //         $('<i/>',
+      //           { "class": "material-icons songPlay",
+      //             "song-id=" : item[0],
+      //             "data-link": item[2],
+      //             "data-name": item[1],
+      //             "cover"    : item[3]
+      //           })
+      //       )
+      //     )
+      // );
+
 
 
 
