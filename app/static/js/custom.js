@@ -172,7 +172,6 @@ var song = new Audio();
 /////// Our Code
 // TODO: clone hidden collection item so you can add to playlist more than once
 $(".add_song").click(function() {
-        console.log('add-song_click')
         $(this).find( 'li.collection-item' ).show();
         // track = $(this).find( 'li.collection-item' ).clone();
         $(this).find( 'li.collection-item' ).appendTo( "#playlist" );
@@ -236,6 +235,7 @@ $(function() {
 $(function() {
   $('#loadPlaylist').click(function(){
     // var playlist_id = $('#playlists_select option:selected').text()
+    console.log("load-clicked")
     var playlist_id = $('#select option:selected').val();
     var playlist = []
     var obj = { 'playlist_id' : playlist_id }
@@ -265,13 +265,11 @@ $(function() {
 function callback(data) {
   var playlist = JSON.parse(data);
 
-  // console.log(playlist[1])
-  $( "#playlist" ).append(
-    playlist.forEach(function(item){
-      $('<li/>', { "class": "collection-record", text:(item[1]) })
+  playlist.forEach(function(item){
+      $(" #playlist ").append("<p>" + item [0] + " </p>")
 
+      // $('<li/>', { "class": "collection-record", text:(item[1]) })
     }) // endfor
-  ); // append
   } // callback
       // $('<li/>', { "class": "collection-record", text:(item[1]) })
 

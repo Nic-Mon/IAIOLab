@@ -59,9 +59,9 @@ nav .brand-logo{
     <div class="section no-pad-bot">
       <div class="container">
         <br><br>
-        <h1 class="header center teal-text text-lighten-2 gravitas">78 RPM item Player</h1>
+        <h1 class="header center teal-text text-lighten-2 gravitas">78 RPM Record Player</h1>
         <div class="row center">
-          <h5 class="header col s12 light">A modern responsive 78 RPM item playing site</h5>
+          <h5 class="header col s12 light">A modern responsive 78 RPM record playing site</h5>
         </div>
 <!--         <div class="row center">
           <a href="http://materializecss.com/getting-started.html" id="download-button" class="btn-large waves-effect waves-light teal lighten-1">Get Started</a>
@@ -70,7 +70,7 @@ nav .brand-logo{
 
       </div>
     </div>
-    <div class="parallax"><img src="static/images/78rpm.png" alt="Sweet item Player"></div>
+    <div class="parallax"><img src="static/images/78rpm.png" alt="Sweet Record Player"></div>
   </div>
 
 
@@ -85,7 +85,7 @@ nav .brand-logo{
             <h2 class="center brown-text"><i class="material-icons">account_balance</i></h2>
             <h5 class="center">Internet Archive</h5>
 
-            <p class="light">We used <a href="https://archive.org/details/78rpm">Internet Archive's collection of 78 RPMs</a> as our inspiration for this project. They have digitized a bunch of old items - and we wanted to share what they have!</p>
+            <p class="light">We used <a href="https://archive.org/details/78rpm">Internet Archive's collection of 78 RPMs</a> as our inspiration for this project. They have digitized a bunch of old records - and we wanted to share what they have!</p>
           </div>
         </div>
 
@@ -139,7 +139,7 @@ nav .brand-logo{
           <div class="col s12">
 
             <div id="cover" class="col m6 s12 covers z-depth-1"
-              style="background-image:url(static/images/78_rpm.png)">
+              style="background-image:url(static/images/78rpm.png)">
             </div><!-- Covers Ends -->
 
             <div class="col m6 s12 player no-padding teal lighten-5">
@@ -163,6 +163,7 @@ nav .brand-logo{
                     <!-- <i id="fav" class="material-icons">favorite</i> -->
                   </div>
 
+                  <!-- Playlist selector -->
                   <div id="playlists_dropdown" class="col s12">
                   <label>Materialize Select</label>
                    <select id="select" class="browser-default">
@@ -171,7 +172,7 @@ nav .brand-logo{
                      <option value="{{ playlist.id }}">{{playlist.name}}</option>
                      {% endfor %}
                    </select>
-                 </div>
+                  </div>
 
                   <!-- Save / Load Playlist Controls -->
                   <div class="col s12">
@@ -213,11 +214,12 @@ nav .brand-logo{
                   </div>
                   <div class="card-content">
                     <span class="card-title activator grey-text text-darken-4"> {{ record[1] }} <i class="material-icons right">more_vert</i></span>
+                    <!-- <p><a class="add_song" href="#">Add to Playlist</a></p> -->
                     <div class="add_song">
                       <a href="#">Add to Playlist</a>
-                      <li style="display: none;" class="collection-record">
+                      <li style="display: none;" class="collection-item">
                         <div> {{ record[1] }}
-                          <a href="#" class='secondary-content'>
+                          <a href="#playsection" class='secondary-content'>
                             <i class="material-icons songPlay"
                             song-id= "{{ record[0] }}"
                             data-link= "{{ record[2]}}"
@@ -231,20 +233,10 @@ nav .brand-logo{
                 </div>
               </div>
             </div>
+
           {% endfor %}
 
   </div> <!-- /browse -->
-
-<!--   <div class="parallax-container valign-wrapper">
-    <div class="section no-pad-bot">
-      <div class="container">
-        <div class="row center">
-          <h5 class="header col s12 light">A modern responsive front-end framework based on Material Design</h5>
-        </div>
-      </div>
-    </div>
-    <div class="parallax"><img src="background3.jpg" alt="Unsplashed background img 3"></div>
-  </div> -->
 
   <footer class="page-footer teal">
     <div class="container">
