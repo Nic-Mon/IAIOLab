@@ -317,6 +317,9 @@ function formatSecondsAsTime(secs) {
 }
 
 $('#fav').on('click',function(){
+  var path = "static/images/air-horn-club-sample.mp3"
+  var snd = new Audio(path);
+  snd.play();
   color1 = Math.floor((Math.random() * 255) + 1);
   color2 = Math.floor((Math.random() * 255) + 1);
   color3 = Math.floor((Math.random() * 255) + 1);
