@@ -266,11 +266,17 @@ function callback(data) {
   var playlist = JSON.parse(data);
 
   playlist.forEach(function(item){
-      $(" #playlist ").append("<p>" + item [0] + " </p>")
+      $(" #playlist ").append($("<li></li>").addClass("collection-item")
+          .append($("<div></div").text(item[1])
+            .append($('<a></a>').addClass("seconday-content").attr("href", "#")
+              .append($('<i></i>').addClass("material-icons songPlay")
+                .attr({
+                  "data-link": item[2],
+                  "data-name": item[1],
+                  "cover"    : item[3]
+                })))))})}
 
-      // $('<li/>', { "class": "collection-record", text:(item[1]) })
-    }) // endfor
-  } // callback
+ // callback
       // $('<li/>', { "class": "collection-record", text:(item[1]) })
 
       //     $('<div/>', { text:(item[1]) }.append(
