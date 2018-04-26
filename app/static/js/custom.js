@@ -168,6 +168,8 @@ var song = new Audio();
         $("#duration").attr("max", song.duration);
     });
 
+
+/////// Our Code
 // TODO: clone hidden collection item so you can add to playlist more than once
 $(".add_song").click(function() {
 
@@ -223,7 +225,6 @@ $(function() {
         success: function(response) {
             console.log(response);
             $('#playlist').find('li.collection-id').text(response)
-
         },
         error: function(error) {
             console.log(error);
@@ -231,6 +232,64 @@ $(function() {
     });
 });
 });
+
+
+
+$(function() {
+  $('#loadPlaylist').click(function(){
+    // var playlist_id = $('#playlists_select option:selected').text()
+    var playlist_id = $('#select option:selected').val();
+    var playlist = []
+    var obj = { 'playlist_id' : playlist_id }
+    var myJSON = JSON.stringify(obj);
+    $.ajax({
+        url: '/load_playlist',
+        type: 'POST',
+        data: myJSON,
+        contentType: 'application/json',
+        success: callback,
+        error: function(error) {
+            console.log(error);
+        }
+    });
+
+    // var $i = $('<i />').addClass("material-icons songPlay")
+    // $i.attr({
+    //   "song-id=" : item[0],
+    //   "data-link": item[2],
+    //   "data-name": item[1],
+    //   "cover"    : item[3]
+    // });
+
+  });
+});
+
+function callback(data) {
+  var playlist = JSON.parse(data);
+
+  // console.log(playlist[1])
+  playlist.forEach(function(item) {
+    var $i = $('<li/>', { "class": "collection-record" }).append(
+        $('<div/>', { text:(item[1]) }.append(
+          $('<a/>', { "href": "#" , "class": "secondary-content"} ).append(
+            $('<i/>',
+              { "class": "material-icons songPlay",
+                "song-id=" : item[0],
+                "data-link": item[2],
+                "data-name": item[1],
+                "cover"    : item[3]
+              })
+          )
+        )
+      )
+    );
+    $( "#playlist" ).append($i);
+  });
+}
+
+
+
+//////End our code
 
 function formatSecondsAsTime(secs) {
   var hr  = Math.floor(secs / 3600);

@@ -1,6 +1,7 @@
 from flask import render_template, redirect, request, session
 from app import app, models
 from .models import *
+import json
 import requests
 import random
 import numpy as np
@@ -30,6 +31,10 @@ def get_mp3_filename(identifier):
 
 @app.route('/')
 def index():
+
+	# Get User
+	user = 'peter' # TESTING
+
 	song_ids = random.sample(georgeblood_ids, 12)
 	records = []
 	url = 'http://archive.org/download/'
@@ -42,7 +47,9 @@ def index():
 
 		records.append( (identifier, song_name, mp3_url, img_url) )
 
-	return render_template('index.html', records=records)
+	user_playlists = db_fetch_playlists(user)
+
+	return render_template('index.html', records=records, playlists=user_playlists)
 
 @app.route("/save_playlist", methods=['GET','POST'])
 def save_playlist():
@@ -56,7 +63,6 @@ def save_playlist():
 	user = 'peter' # TESTING
 	song_id_list = mydata['song_id_list']
 	playlist_name = mydata['playlist_name']
-	# playlist_id = mydata['playlist_id']
 
     ## if playlist_id is null, create new playlist and get id from function
 	if mydata['playlist_id']:
@@ -71,10 +77,39 @@ def save_playlist():
 	return_id = str(playlist_id)
 	return return_id
 
-@app.route("/load_playlist")
+@app.route("/load_playlist", methods=['GET','POST'])
 def load_playlist():
 
-	return "nothing"
+	# Get user
+	user = 'peter' # TESTING
+
+	if not request.json:
+		return "no json received"
+	else:
+		mydata = request.json # will be
+
+	playlist_id = mydata['playlist_id']
+
+	songs = db_fetch_playlist_songs(playlist_id)
+
+	playlist = []
+	records = []
+	url = 'http://archive.org/download/'
+
+	for song in songs:
+		playlist.append(song['song_id'])
+
+	for identifier in playlist:
+		song_mp3 = get_mp3_filename(identifier)
+		song_name = song_mp3[:-4]
+		mp3_url = url + identifier + '/' + song_mp3
+		img_url = url + identifier + '/' + identifier + '_itemimage.jpg'
+
+		records.append( (identifier, song_name, mp3_url, img_url) )
+
+	app.logger.debug(records)
+
+	return json.dumps(records)
 
 # @app.route('/new_user', methods=['GET', 'POST'])
 # def new_user():

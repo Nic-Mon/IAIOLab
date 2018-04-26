@@ -59,9 +59,9 @@ nav .brand-logo{
     <div class="section no-pad-bot">
       <div class="container">
         <br><br>
-        <h1 class="header center teal-text text-lighten-2 gravitas">78 RPM Record Player</h1>
+        <h1 class="header center teal-text text-lighten-2 gravitas">78 RPM item Player</h1>
         <div class="row center">
-          <h5 class="header col s12 light">A modern responsive 78 RPM record playing site</h5>
+          <h5 class="header col s12 light">A modern responsive 78 RPM item playing site</h5>
         </div>
 <!--         <div class="row center">
           <a href="http://materializecss.com/getting-started.html" id="download-button" class="btn-large waves-effect waves-light teal lighten-1">Get Started</a>
@@ -70,7 +70,7 @@ nav .brand-logo{
 
       </div>
     </div>
-    <div class="parallax"><img src="static/images/78rpm.png" alt="Sweet Record Player"></div>
+    <div class="parallax"><img src="static/images/78rpm.png" alt="Sweet item Player"></div>
   </div>
 
 
@@ -85,7 +85,7 @@ nav .brand-logo{
             <h2 class="center brown-text"><i class="material-icons">account_balance</i></h2>
             <h5 class="center">Internet Archive</h5>
 
-            <p class="light">We used <a href="https://archive.org/details/78rpm">Internet Archive's collection of 78 RPMs</a> as our inspiration for this project. They have digitized a bunch of old records - and we wanted to share what they have!</p>
+            <p class="light">We used <a href="https://archive.org/details/78rpm">Internet Archive's collection of 78 RPMs</a> as our inspiration for this project. They have digitized a bunch of old items - and we wanted to share what they have!</p>
           </div>
         </div>
 
@@ -139,7 +139,7 @@ nav .brand-logo{
           <div class="col s12">
 
             <div id="cover" class="col m6 s12 covers z-depth-1"
-              style="background-image:url(static/images/covers/prism.jpg)">
+              style="background-image:url(static/images/78_rpm.png)">
             </div><!-- Covers Ends -->
 
             <div class="col m6 s12 player no-padding teal lighten-5">
@@ -160,13 +160,23 @@ nav .brand-logo{
                     <i id="play" class="material-icons">play_circle_outline</i>
                     <i id="next" class="material-icons">skip_next</i>
                     <i id="volume" class="material-icons">volume_up</i>
-                    <i id="fav" class="material-icons">favorite</i>
+                    <!-- <i id="fav" class="material-icons">favorite</i> -->
                   </div>
+
+                  <div id="playlists_dropdown" class="col s12">
+                  <label>Materialize Select</label>
+                   <select id="select" class="browser-default">
+                     <option value="" disabled>Choose your option</option>
+                     {% for playlist in playlists %}
+                     <option value="{{ playlist.id }}">{{playlist.name}}</option>
+                     {% endfor %}
+                   </select>
+                 </div>
 
                   <!-- Save / Load Playlist Controls -->
                   <div class="col s12">
                     <a id="savePlaylist" class="waves-effect waves-light btn-small">Save Playlist</a>
-                    <a class="waves-effect btn-small disabled">Load Playlist</a>
+                    <a id="loadPlaylist" class="waves-effect btn-small">Load Playlist</a>
                   </div>
                 <div class="playlist col s12 no-padding">
                   <ul id="playlist" class="collection with-header grey lighten-4">
@@ -175,28 +185,37 @@ nav .brand-logo{
                     <!-- playlist name -->
                     <li class="collection-header"><h5></h5></li>
                     <!-- playlist items -->
-                    <li class="collection-item">
-                      <div>Sugarfoot Stomp
-                        <a href="#playsection" class='secondary-content'>
-                          <i class="material-icons songPlay"
-                          song-id="78_sugar-foot-stomp_connies-inn-orchestra-armstrong-oliver-rex-stewart-russell-smith_gbia0001054a"
-                          data-link="https://archive.org/download/78_sugar-foot-stomp_connies-inn-orchestra-armstrong-oliver-rex-stewart-russell-smith_gbia0001054a/Sugar%20Foot%20Stomp%20-%20Connie%27s%20Inn%20Orchestra.mp3"
-                          data-name='Sugarfoot Stomp'
-                          cover="https://ia801601.us.archive.org/6/items/78_sugar-foot-stomp_connies-inn-orchestra-armstrong-oliver-rex-stewart-russell-smith_gbia0001054a/78_sugar-foot-stomp_connies-inn-orchestra-armstrong-oliver-rex-stewart-russell-smith_gbia0001054a_itemimage.jpg">play_arrow</i>
-                        </a>
-                      </div>
-                    </li>
-                    <li class="collection-item">
-                      <div>Grieg Piano Concierto
-                        <a href="#playsection" class="secondary-content">
-                          <i class="material-icons songPlay"
-                          song-id="78_grieg-piano-concerto_freddy-martin-and-his-orchestra-jack-fina-ray-austin_gbia0019618a"
-                          data-link="https://archive.org/download/78_grieg-piano-concerto_freddy-martin-and-his-orchestra-jack-fina-ray-austin_gbia0019618a/Grieg%20Piano%20Concerto%20-%20Freddy%20Martin%20and%20his%20Orchestra.mp3"
-                          data-name='Grieg Piano Concierto'
-                          cover="https://ia800802.us.archive.org/32/items/78_grieg-piano-concerto_freddy-martin-and-his-orchestra-jack-fina-ray-austin_gbia0019618a/78_grieg-piano-concerto_freddy-martin-and-his-orchestra-jack-fina-ray-austin_gbia0019618a_itemimage.jpg">play_arrow</i>
-                        </a>
-                      </div>
-                    </li>
+                    {% for item in load_playlist %}
+                    <div class="col s6 m6">
+                      <div class="icon-block">
+
+                        <div class="card">
+                              <div class="card-image waves-effect waves-block waves-light">
+                                <img class="activator" src="{{ item[3] }}">
+                              </div>
+                              <div class="card-content">
+                                <span class="card-title activator grey-text text-darken-4"> {{ item[1] }} <i class="material-icons right">more_vert</i></span>
+                                <!-- <p><a class="add_song" href="#">Add to Playlist</a></p> -->
+                                <div class="add_song">
+                                  <a href="#">Add to Playlist</a>
+                                  <li style="display: none;" class="collection-item">
+                                    <div> {{ item[1] }}
+                                      <a href="#playsection" class='secondary-content'>
+                                        <i class="material-icons songPlay"
+                                        song-id= "{{ item[0] }}"
+                                        data-link= "{{ item[2]}}"
+                                        data-name= "{{ item[1] }}"
+                                        cover="{{ item[3] }}">play_arrow</i>
+                                      </a>
+                                    </div>
+                                  </li>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+
+                      {% endfor %}
                   </ul>
                 </div>
             </div><!-- Player Ends -->
@@ -228,9 +247,9 @@ nav .brand-logo{
                     <!-- <p><a class="add_song" href="#">Add to Playlist</a></p> -->
                     <div class="add_song">
                       <a href="#">Add to Playlist</a>
-                      <li style="display: none;" class="collection-item">
+                      <li style="display: none;" class="collection-record">
                         <div> {{ record[1] }}
-                          <a href="#playsection" class='secondary-content'>
+                          <a href="#" class='secondary-content'>
                             <i class="material-icons songPlay"
                             song-id= "{{ record[0] }}"
                             data-link= "{{ record[2]}}"
