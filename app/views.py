@@ -1,4 +1,4 @@
-from flask import render_template, redirect, request, session
+testfrom flask import render_template, redirect, request, session
 from app import app, models
 from .models import *
 import json
@@ -33,7 +33,7 @@ def get_mp3_filename(identifier):
 def index():
 
 	# Get User
-	user = 'peter' # TESTING
+	user = 'test' # TESTING
 
 	song_ids = random.sample(georgeblood_ids, 12)
 	records = []
@@ -60,7 +60,7 @@ def save_playlist():
 		mydata = request.json # will be
 
 	## Get user and songs
-	user = 'peter' # TESTING
+	user = 'test' # TESTING
 	song_id_list = mydata['song_id_list']
 	playlist_name = mydata['playlist_name']
 
