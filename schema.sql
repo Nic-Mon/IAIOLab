@@ -37,5 +37,5 @@ create view playlist_song_paths AS
 
 -- temporarily hard code an account for Peter;
 insert into users (username, password)
-    values ('peter', 'password');
+    values ('test', 'password');
 
