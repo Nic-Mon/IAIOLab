@@ -1,4 +1,4 @@
-testfrom flask import render_template, redirect, request, session
+from flask import render_template, redirect, request, session
 from app import app, models
 from .models import *
 import json
