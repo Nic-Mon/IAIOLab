@@ -7,6 +7,8 @@ $('document').ready(function(){
   //   songs.push($(this));
   // });
 
+
+//adapted from https://github.com/Ketcap/Materialize-Music-Player for music play/stop/skip/random
 var song = new Audio();
   $(document).on('click','.songPlay',function(){
     $('.collection-item[status=playing]').attr('status','stopped')
@@ -24,6 +26,7 @@ var song = new Audio();
       'color':'#fff',
     })
 
+    //stop
     if(_this.attr('state') == 'stop' || typeof _this.attr('state') === 'undefined' ){
 
     $('#duration').val(0);
@@ -36,6 +39,7 @@ var song = new Audio();
 
     var src = _this.attr('data-link');
     $('#cover').css('background-image','url('+_this.attr('cover')+')');
+    //play
 
     $("#play").text('pause_circle_outline');
 
@@ -292,15 +296,21 @@ function formatSecondsAsTime(secs) {
   return min + ':' + sec;
 }
 
+
+//Heart icon - spin and airhorn on click
 $('#fav').on('click',function(){
+  //airhorn!
   var path = "static/images/air-horn-club-sample.mp3"
   var snd = new Audio(path);
   snd.play();
+  //map colors
   color1 = Math.floor((Math.random() * 255) + 1);
   color2 = Math.floor((Math.random() * 255) + 1);
   color3 = Math.floor((Math.random() * 255) + 1);
 
   color = 'rgb('+color1+','+color2+','+color3+')';
+
+  //spin
 
   $('#fav').queue(function(next){
     $('#fav').css({
