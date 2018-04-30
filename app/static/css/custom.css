@@ -104,3 +104,13 @@ input[type=range]::-webkit-slider-thumb {
 .musicplayerall {
   padding-left: 8%;
 }
+
+.card {
+  height: 500;
+  overflow-y: hidden;
+}
+
+#playsection {
+  margin: none;
+  width: 100%;
+}
