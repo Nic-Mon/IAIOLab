@@ -123,8 +123,6 @@ nav .brand-logo{
   </div> -->
 
   <div id='playsection' class="container">
-    <div class="section">
-
       <div class="row">
         <div class="col s12">
           <h3><i class="mdi-content-send brown-text"></i></h3>
@@ -142,6 +140,7 @@ nav .brand-logo{
               style="background-image:url(static/images/78rpm.png)">
             </div><!-- Covers Ends -->
 
+            <!-- Music player starts -->
             <div class="col m6 s12 player no-padding teal lighten-5">
                 <div class="musicplayer col s12 teal">
                   <!-- <span class="right share">Share</span> -->
@@ -165,7 +164,7 @@ nav .brand-logo{
 
                   <!-- Playlist selector -->
                   <div id="playlists_dropdown" class="col s12">
-                  <label>Materialize Select</label>
+                  <label>Select a Previous Playlist</label>
                    <select id="select" class="browser-default">
                      <option value="" disabled>Choose your option</option>
                      {% for playlist in playlists %}
@@ -192,12 +191,12 @@ nav .brand-logo{
         </div>
       </div>
     </div>
-
+  </div>
+  </div>
   </div>
   </div>
 
   <div id='browse' class="container">
-    <div class="section">
       <h4 class="left-align"> Browse </h4>
 
       <!--   Cards / Icon Section   -->
@@ -205,7 +204,7 @@ nav .brand-logo{
 
         <!-- Cards Template -->
         {% for record in records %}
-        <div class="col s6 m6">
+        <div class="col s4 m4">
           <div class="icon-block">
 
             <div class="card">
@@ -233,10 +232,11 @@ nav .brand-logo{
                 </div>
               </div>
             </div>
-
           {% endfor %}
-
-  </div> <!-- /browse -->
+        </div>
+      </div>
+    </div> <!-- /browse -->
+  </div>
 
   <footer class="page-footer teal">
     <div class="container">
@@ -246,24 +246,6 @@ nav .brand-logo{
           <p class="grey-text text-lighten-4">We are the best IOLab team.  We like old records. Made with love by Matt Bayley, Michelle Carney, Nic Mon, and Peter Rowland.</p>
 
         </div>
-        <!-- <div class="col l3 s12">
-          <h5 class="white-text">Settings</h5>
-          <ul>
-            <li><a class="white-text" href="#!">Link 1</a></li>
-            <li><a class="white-text" href="#!">Link 2</a></li>
-            <li><a class="white-text" href="#!">Link 3</a></li>
-            <li><a class="white-text" href="#!">Link 4</a></li>
-          </ul>
-        </div>
-        <div class="col l3 s12">
-          <h5 class="white-text">Connect</h5>
-          <ul>
-            <li><a class="white-text" href="#!">Link 1</a></li>
-            <li><a class="white-text" href="#!">Link 2</a></li>
-            <li><a class="white-text" href="#!">Link 3</a></li>
-            <li><a class="white-text" href="#!">Link 4</a></li>
-          </ul>
-        </div> -->
       </div>
     </div>
 

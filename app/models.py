@@ -63,19 +63,16 @@ def db_fetch_playlists(username):
 def db_fetch_playlist_songs(playlist_id):
     with sql.connect(dbname) as con:
         cur = con.cursor()
-        sqltext = ("SELECT playlist_id, song_order, song_id "
-            # "mp3_path, img_path "
-            "FROM playlist_songs "
+        sqltext = ("SELECT playlist_id, song_order, song_id, mp3_path"
+            "FROM playlist_song_paths "
             "WHERE (playlist_id=?)")
         response = []
         for rowlist in cur.execute(sqltext, [playlist_id]):
             row = {}
-            # row['id'] = rowlist[0]
             row['playlist_id'] = rowlist[0]
             row['song_order'] = rowlist[1]
             row['song_id'] = rowlist[2]
-            # row['mp3_path'] = rowlist[4]
-            # row['img_path'] = rowlist[5]
+            row['mp3_path'] = rowlist[3]
             response.append(row)
         return response
 
