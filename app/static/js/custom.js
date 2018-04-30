@@ -1,11 +1,10 @@
 $('document').ready(function(){
 
-  // update_songs();
-  // var songs = new Array();
-  // $('.songPlay').each(function(){
-  //   $(this).parents('.collection-item');
-  //   songs.push($(this));
-  // });
+  var songs = new Array();
+  $('.songPlay').each(function(){
+    $(this).parents('.collection-item');
+    songs.push($(this));
+  });
 
 var song = new Audio();
   $(document).on('click','.songPlay',function(){
@@ -189,7 +188,7 @@ function update_songs(){
 $(function() {
   $('#savePlaylist').click(function(){
 
-    // Check if playlist name
+    // Check if playlist has name
     if ($('#playlist').find('li.collection-header').text() === ""){
         var message = "please give this playlist a name"
         result = window.prompt(message, "default");
@@ -231,8 +230,10 @@ $(function() {
 $(function() {
   $('#loadPlaylist').click(function(){
 
+    // Clear current playlist
     $("#playlist").html('');
-    // var playlist_id = $('#playlists_select option:selected').text()
+
+    //
     var playlist_id = $('#select option:selected').val();
     var playlist = []
     var obj = { 'playlist_id' : playlist_id }
@@ -247,15 +248,6 @@ $(function() {
             console.log(error);
         }
     });
-
-    // var $i = $('<i />').addClass("material-icons songPlay")
-    // $i.attr({
-    //   "song-id=" : item[0],
-    //   "data-link": item[2],
-    //   "data-name": item[1],
-    //   "cover"    : item[3]
-    // });
-
   });
 });
 
@@ -275,7 +267,7 @@ function callback(data) {
                   "data-name": item[1],
                   "cover"    : item[3]
                 })))))})}
-//////End our code
+//////End of our code
 
 function formatSecondsAsTime(secs) {
   var hr  = Math.floor(secs / 3600);

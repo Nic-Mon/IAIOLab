@@ -81,7 +81,7 @@ def save_playlist():
 def load_playlist():
 
 	# Get user
-	user = 'peter' # TESTING
+	user = 'test' # TESTING
 
 	if not request.json:
 		return "no json received"
