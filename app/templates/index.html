@@ -18,6 +18,17 @@
 </head>
 <style>
 
+@media only screen and (min-width: 993px) {
+  .container {
+    width: 100%;
+  }
+}
+
+#playlist{
+  height:304px;
+  overflow:auto;
+}
+
 .gravitas{
   font-family: 'Gravitas One', cursive;
 }
@@ -207,7 +218,7 @@ nav .brand-logo{
         <div class="col s4 m4">
           <div class="icon-block">
 
-            <div class="card">
+            <div class="card medium">
                   <div class="card-image waves-effect waves-block waves-light">
                     <img class="activator" src="{{ record[3] }}">
                   </div>

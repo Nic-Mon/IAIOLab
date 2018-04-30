@@ -1,12 +1,12 @@
 
 .covers{
   padding: 0px !important;
-  margin-top: 50px;
-  height: 500px;
+  /* margin-top: 50px; */
+  height: 518px;
   background-size: cover;
 }
 .player{
-  height: 600px;
+  height: 100%;
 }
 .share{
   border-radius: 30px;
