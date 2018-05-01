@@ -169,17 +169,14 @@ var song = new Audio();
     });
 
 
-/////// Our Code
-// TODO: clone hidden collection item so you can add to playlist more than once
-$(".add_song").click(function() {
-  $(this).find( 'li.collection-item' ).show();
-  // track = $(this).find( 'li.collection-item' ).clone();
-  $(this).find( 'li.collection-item' ).appendTo( "#playlist" );
-  // $(this).find( 'li.collection-item' ).hide();
+/////// Our Code Starts here
 
-  // Add up/down arrows
-  // <i class="small material-icons up">arrow_drop_up</i>
-  // <i class="small material-icons down">arrow_drop_down</i>
+
+// Add song from browse records section to playlist
+$(".add_song").click(function() {
+  var item = $(this).find( 'li.collection-item' ).clone()
+  item.show()
+  item.appendTo( "#playlist" );
 });
 
 // Playlist up/down buttom click handler
@@ -199,7 +196,6 @@ function update_songs(){
     $(this).parents('.collection-item');
     songs.push($(this));
   });
-  console.log(songs);
 }
 
 // Save songs in playlist
@@ -296,7 +292,8 @@ function callback(data) {
                   "data-name": item[1],
                   "cover"    : item[3]
                 })))))})}
-//////End of our code
+
+////// Our Code Ends here
 
 function formatSecondsAsTime(secs) {
   var hr  = Math.floor(secs / 3600);
@@ -312,7 +309,6 @@ function formatSecondsAsTime(secs) {
 
   return min + ':' + sec;
 }
-
 
 //Heart icon - spin and airhorn on click
 $('#fav').on('click',function(){
