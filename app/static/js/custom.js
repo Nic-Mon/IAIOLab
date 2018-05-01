@@ -1,3 +1,4 @@
+//adapted from https://github.com/Ketcap/Materialize-Music-Player for music play/stop/skip/random
 $('document').ready(function(){
 
   var songs = new Array();
@@ -6,8 +7,6 @@ $('document').ready(function(){
     songs.push($(this));
   });
 
-
-//adapted from https://github.com/Ketcap/Materialize-Music-Player for music play/stop/skip/random
 var song = new Audio();
   $(document).on('click','.songPlay',function(){
     $('.collection-item[status=playing]').attr('status','stopped')
@@ -173,12 +172,27 @@ var song = new Audio();
 /////// Our Code
 // TODO: clone hidden collection item so you can add to playlist more than once
 $(".add_song").click(function() {
-        $(this).find( 'li.collection-item' ).show();
-        // track = $(this).find( 'li.collection-item' ).clone();
-        $(this).find( 'li.collection-item' ).appendTo( "#playlist" );
-        // $(this).find( 'li.collection-item' ).hide();
+  $(this).find( 'li.collection-item' ).show();
+  // track = $(this).find( 'li.collection-item' ).clone();
+  $(this).find( 'li.collection-item' ).appendTo( "#playlist" );
+  // $(this).find( 'li.collection-item' ).hide();
+
+  // Add up/down arrows
+  // <i class="small material-icons up">arrow_drop_up</i>
+  // <i class="small material-icons down">arrow_drop_down</i>
 });
 
+// Playlist up/down buttom click handler
+$("a").on('click','.up, .down', function() {
+  var item = $(this).parents('li.collection-item');
+	if ($(this).is(".up")) {
+            item.insertBefore($(this).parents('li.collection-item').prev());
+        } else {
+            item.insertAfter($(this).parents('li.collection-item').next());
+    }
+  });
+
+// Update songs in playlist
 function update_songs(){
   var songs = new Array();
   $("#playlist").find('.songPlay').each(function(){
@@ -192,7 +206,7 @@ function update_songs(){
 $(function() {
   $('#savePlaylist').click(function(){
 
-    // Check if playlist has name
+    // Prompt for playlist name, if empty
     if ($('#playlist').find('li.collection-header').text() === ""){
         var message = "please give this playlist a name"
         result = window.prompt(message, "default");
@@ -216,6 +230,8 @@ $(function() {
     // Create JSON object to send to server
     var obj = { 'playlist_name' : playlist_name, 'playlist_id' : playlist_id, 'song_id_list' : song_id_list};
     var myJSON = JSON.stringify(obj);
+
+    // Send Data to server
     $.ajax({
         url: '/save_playlist',
         type: 'POST',
@@ -228,20 +244,27 @@ $(function() {
             console.log(error);
         }
     });
-});
+  });
 });
 
+// Load playlist from dropdown
 $(function() {
   $('#loadPlaylist').click(function(){
 
     // Clear current playlist
     $("#playlist").html('');
 
-    //
+    // Get id value from dropdown
     var playlist_id = $('#select option:selected').val();
+
+    // empty variable to receive return data
     var playlist = []
+
+    // Create object and convert to JSON
     var obj = { 'playlist_id' : playlist_id }
     var myJSON = JSON.stringify(obj);
+
+    // Send request
     $.ajax({
         url: '/load_playlist',
         type: 'POST',
@@ -255,9 +278,11 @@ $(function() {
   });
 });
 
+// Callback function that receives AJAX asynchronously
 function callback(data) {
   var playlist = JSON.parse(data);
 
+// Place return values in html structure and insert into playlist
   playlist.forEach(function(item){
       $("#playlist")
         .append($("<li></li>").addClass("collection-item")

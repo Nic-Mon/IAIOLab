@@ -154,51 +154,53 @@ nav .brand-logo{
 
             <!-- Music player starts -->
             <div class="col m6 s12 player no-padding teal lighten-5">
-                <div class="musicplayer col s12 teal">
-                  <!-- <span class="right share">Share</span> -->
+              <div class="musicplayer col s12 teal">
+                <!-- <span class="right share">Share</span> -->
 
-                  <div class="col s12">
-                    <span class="title"></span>
-                    <span class="right duration"></span>
-                    <input type="range" id="duration" min="0" value="0" />
-                    <span class="left current"></span>
-                    </form>
-                  </div>
-                  <div class="col s12 controls">
-                    <i id="shuffle" class="material-icons">shuffle</i>
-                    <i id="repeat" class="material-icons">repeat</i>
-                    <i id="prev" class="material-icons">skip_previous</i>
-                    <i id="play" class="material-icons">play_circle_outline</i>
-                    <i id="next" class="material-icons">skip_next</i>
-                    <i id="volume" class="material-icons">volume_up</i>
-                    <i id="fav" class="material-icons">favorite</i>
-                  </div>
-
-                  <!-- Playlist selector -->
-                  <div id="playlists_dropdown" class="col s12">
-                  <label>Select a Previous Playlist</label>
-                   <select id="select" class="browser-default">
-                     <option value="" disabled>Choose your option</option>
-                     {% for playlist in playlists %}
-                     <option value="{{ playlist.id }}">{{playlist.name}}</option>
-                     {% endfor %}
-                   </select>
-                  </div>
-
-                  <!-- Save / Load Playlist Controls -->
-                  <div class="col s12">
-                    <a id="savePlaylist" class="waves-effect waves-light btn-small">Save Playlist</a>
-                    <a id="loadPlaylist" class="waves-effect btn-small">Load Playlist</a>
-                  </div>
-                <div class="playlist col s12 no-padding">
-                  <ul id="playlist" class="collection with-header grey lighten-4">
-                    <!-- playlist id -->
-                    <li class="collection-id hidden"></li>
-                    <!-- playlist name -->
-                    <li class="collection-header"><h5></h5></li>
-                    <!-- playlist items -->
-                  </ul>
+                <div class="col s12">
+                  <span class="title"></span>
+                  <span class="right duration"></span>
+                  <input type="range" id="duration" min="0" value="0" />
+                  <span class="left current"></span>
                 </div>
+
+                <div class="col s12 controls">
+                  <i id="shuffle" class="material-icons">shuffle</i>
+                  <i id="repeat" class="material-icons">repeat</i>
+                  <i id="prev" class="material-icons">skip_previous</i>
+                  <i id="play" class="material-icons">play_circle_outline</i>
+                  <i id="next" class="material-icons">skip_next</i>
+                  <i id="volume" class="material-icons">volume_up</i>
+                  <i id="fav" class="material-icons">favorite</i>
+                </div>
+
+                <!-- Playlist selector -->
+                <div id="playlists_dropdown" class="col s12">
+                <label>Select a Previous Playlist</label>
+                 <select id="select" class="browser-default">
+                   <option value="" disabled>Choose your option</option>
+                   {% for playlist in playlists %}
+                   <option value="{{ playlist.id }}">{{playlist.name}}</option>
+                   {% endfor %}
+                 </select>
+                </div>
+                <div>
+                  <a class="collection-header"><h5></h5></a>
+                </div>
+                <!-- Save / Load Playlist Controls -->
+                <div class="col s12">
+                  <a id="savePlaylist" class="waves-effect waves-light btn-small">Save Playlist</a>
+                  <a id="loadPlaylist" class="waves-effect btn-small">Load Playlist</a>
+                </div>
+              <div class="playlist col s12 no-padding">
+                <ul id="playlist" class="collection with-header grey lighten-4">
+                  <!-- playlist id -->
+                  <li class="collection-id hidden"></li>
+                  <!-- playlist name -->
+                  <!-- <li class="collection-header"><h5></h5></li> -->
+                  <!-- playlist items -->
+                </ul>
+              </div>
             </div><!-- Player Ends -->
         </div>
       </div>
@@ -229,6 +231,8 @@ nav .brand-logo{
                     <div class="add_song">
                       <a href="#playsection">Add to Playlist</a>
                       <li style="display: none;" class="collection-item">
+                        <a href="#playsection" class="up"><i class="small material-icons up">arrow_drop_up</i></a>
+                        <a href="#playsection" class="down"><i class="small material-icons down">arrow_drop_down</i></a>
                         <div> {{ record[1] }}
                           <a href="#playsection" class='secondary-content'>
                             <i class="material-icons songPlay"
