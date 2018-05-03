@@ -35,7 +35,3 @@ create view playlist_song_paths AS
         LEFT JOIN mp3_paths 
             ON playlist_songs.song_id=mp3_paths.song_id;
 
--- temporarily hard code an account for Peter;
-insert into users (username, password)
-    values ('test', 'password');
-

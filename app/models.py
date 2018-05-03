@@ -1,14 +1,6 @@
 import sqlite3 as sql
 dbname = 'app.db'
 
-def db_reset():
-    with open('schema.sql', 'r') as myfile:
-        schema=myfile.read()
-    with sql.connect(dbname) as con:
-        cur = con.cursor()
-        cur.execute(schema)
-        con.commit()
-
 def db_create_user(username, password):
     with sql.connect(dbname) as con:
         cur = con.cursor()
