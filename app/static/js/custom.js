@@ -248,10 +248,15 @@ $(function() {
   $('#loadPlaylist').click(function(){
 
     // Clear current playlist
-    $("#playlist").html('');
+    $("#playlist").find("li.collection-item").remove();
 
     // Get id value from dropdown
     var playlist_id = $('#select option:selected').val();
+    var playlist_name = $('#select option:selected').text()
+
+    // Load name and id
+    $("#playlist").find("li.collection-header").text(playlist_name);
+    $("#playlist").find("li.collection-id").text(playlist_id);
 
     // empty variable to receive return data
     var playlist = []
