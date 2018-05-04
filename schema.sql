@@ -31,7 +31,11 @@ create table mp3_paths (
 );
 
 create view playlist_song_paths AS
-    SELECT * FROM playlist_songs
+    SELECT playlist_id,
+        song_order,
+        playlist_songs.song_id,
+        mp3_path
+    FROM playlist_songs
         LEFT JOIN mp3_paths 
             ON playlist_songs.song_id=mp3_paths.song_id;
 

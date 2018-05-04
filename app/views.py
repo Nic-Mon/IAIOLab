@@ -134,7 +134,9 @@ def save_playlist():
         mydata = request.json # will be
 
     ## Get user and songs
-    user = 'test' # TESTING
+    if 'username' not in session:
+        return redirect('/who')
+    user = session['username']
     song_id_list = mydata['song_id_list']
     playlist_name = mydata['playlist_name']
 
@@ -155,7 +157,9 @@ def save_playlist():
 def load_playlist():
 
     # Get user
-    #user = 'test' # TESTING
+    if 'username' not in session:
+        return redirect('/who')
+    user = session['username']
 
     if not request.json:
         return "no json received"
