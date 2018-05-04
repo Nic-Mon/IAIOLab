@@ -34,10 +34,17 @@ def get_mp3_filename(identifier):
 @app.route('/who')
 def who():
     print('rendering login.html')
+    form = UserForm()
     return render_template(
         'login.html', 
+        form=form,
         message="Let's get you logged in"
         )
+
+@app.route('/logout', methods=['GET'])
+def logout():
+    session.clear() 
+    return redirect('who')
 
 @app.route('/new_user', methods=['POST'])  
 def new_user():
@@ -47,8 +54,8 @@ def new_user():
         # Get data from the form
         # Send data from form to Database
         username = form.username.data
-        password = hashlib.md5(form.password.data)
-        success = insert_user(username, password)
+        password = hashlib.md5(form.password.data.encode('utf8')).hexdigest()
+        success = db_create_user(username, password)
         if success:
             session['username'] = username
             print('success')
@@ -57,12 +64,14 @@ def new_user():
             print('failed')
             return render_template(
                 'login.html',
+                form=form,
                 message="That username is already taken"
                 )
     print(form.errors)
     print(request.method)
     return render_template(
         'login.html',
+        form=form,
         message='Form incomplete, try again'
         )
 
@@ -74,7 +83,7 @@ def login():
         # Get data from the form
         # Send data from form to Database
         username = form.username.data
-        password = hashlib.md5(form.password.data)
+        password = hashlib.md5(form.password.data.encode('utf8')).hexdigest()
         success = db_login(username, password)
         if success:
             session['username'] = username
@@ -84,12 +93,14 @@ def login():
             print('failed')
             return render_template(
                 'login.html',
+                form=form,
                 message="Login failed"
                 )
     print(form.errors)
     print(request.method)
     return render_template(
         'login.html',
+        form=form,
         message='Form incomplete, try again'
         )
 
@@ -144,7 +155,7 @@ def save_playlist():
 def load_playlist():
 
     # Get user
-    user = 'test' # TESTING
+    #user = 'test' # TESTING
 
     if not request.json:
         return "no json received"

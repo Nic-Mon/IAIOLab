@@ -14,6 +14,7 @@
   <div class="valign-wrapper row login-box">
     <div class="col card hoverable s10 pull-s1 m6 pull-m3 l4 pull-l4">
       <form action='/login' method='post'>
+        {{ form.hidden_tag() }}
         <div class="card-content">
           <span class="card-title">Enter credentials</span>
           <div class="row">
@@ -29,10 +30,11 @@
         </div>
         <div class="card-action right-align">
           <!-- <input type="reset" id="reset" class="btn-flat grey-text waves-effect"> -->
-          <input type="submit" class="btn green waves-effect waves-light" value="Login">
+          <input type="submit" class="btn green waves-effect waves-light" value="Login" formaction='/login'>
+          <input type="submit" class="btn green waves-effect waves-light" value="New User" formaction='/new_user'>
         </div>
       </form>
-			<a href="/new_user"> Sign Up </a>
+			<!--<a href="/new_user"> Sign Up </a> -->
     </div>
   </div>
 
