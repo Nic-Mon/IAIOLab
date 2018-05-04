@@ -21,6 +21,7 @@ def db_login(username, password):
         return (cur.fetchone()[0]>0)
 
 def db_create_playlist(username, name):
+    print('creating playlist with ' + username + ' ' + name) 
     with sql.connect(dbname) as con:
         cur = con.cursor()
         sqltext = ("INSERT INTO playlists (username, name)"
@@ -55,7 +56,7 @@ def db_fetch_playlists(username):
 def db_fetch_playlist_songs(playlist_id):
     with sql.connect(dbname) as con:
         cur = con.cursor()
-        sqltext = ("SELECT playlist_id, song_order, song_id, mp3_path"
+        sqltext = ("SELECT playlist_id, song_order, song_id, mp3_path "
             "FROM playlist_song_paths "
             "WHERE (playlist_id=?)")
         response = []
