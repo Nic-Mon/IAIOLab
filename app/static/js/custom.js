@@ -298,6 +298,15 @@ function callback(data) {
                   "cover"    : item[3]
                 })))))})}
 
+  $(function() {
+    $('#clearPlaylist').click(function(){
+      $("#playlist").find("li.collection-header").text("");
+      $("#playlist").find("li.collection-id").text("");
+      $("#playlist").find("li.collection-item").remove();
+    });
+  });
+
+
 ////// Our Code Ends here
 
 function formatSecondsAsTime(secs) {
