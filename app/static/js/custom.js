@@ -276,7 +276,7 @@ $(function() {
 
 // Callback function that receives AJAX asynchronously
 function callback(data) {
-  var playlist = JSON.parse(data);
+  var playlist = data;
 
 // Place return values in html structure and insert into playlist
   playlist.forEach(function(item){
